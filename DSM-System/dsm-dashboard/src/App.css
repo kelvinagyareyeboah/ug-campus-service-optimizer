@@ -1,0 +1,68 @@
+/* Dark Mode System Theme */
+:root {
+  --bg: #1a1a2e;
+  --card: #16213e;
+  --primary: #0f3460;
+  --accent: #e94560;
+  --text: #ffffff;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', monospace; /* Hackerman vibes */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+h1 { text-align: center; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+
+/* Memory Grid */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.memory-cell {
+  background: var(--card);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.memory-cell:hover { transform: translateY(-5px); border-color: var(--accent); }
+.value { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Logs Panel */
+.logs-panel {
+  background: black;
+  border: 1px solid #333;
+  padding: 10px;
+  height: 200px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+
+.log-item { border-bottom: 1px solid #222; padding: 5px 0; color: #00ff00; }
