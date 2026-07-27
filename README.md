@@ -1,2 +1,2 @@
-# ug-campus-se-optimizer
-A smart c
+# ug-campus-se-ptimizer
+A s
