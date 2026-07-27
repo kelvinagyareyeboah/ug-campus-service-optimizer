@@ -1,2 +1,2 @@
 # ug-campus-se-optimizer
-A smart camp
+A smart c
