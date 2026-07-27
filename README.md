@@ -1,2 +1,2 @@
-# ug-campus-service-optimizer
+# ug-campus-se-optimizer
 A smart camp
