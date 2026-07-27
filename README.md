@@ -1,2 +1,2 @@
 # ug-campus-service-optimizer
-A smart campvicagement system for the Us Gma tte, pri, technnd routat 
+A smart campvicagement system for the Us Gma tte, pri, technnd r 
