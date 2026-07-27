@@ -1,1 +1,1 @@
-# ug-campus-smiz
+# ug-campus
