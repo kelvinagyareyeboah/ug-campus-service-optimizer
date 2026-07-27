@@ -1,1 +1,1 @@
-# ug-campus
+# ug-campu
