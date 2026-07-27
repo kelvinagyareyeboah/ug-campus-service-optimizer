@@ -1,2 +1,2 @@
 # ug-campus-service-optimizer
-A smart campus service management system for the Us Gma tte, pri, technnd routeizatio 
+A smart campvice management system for the Us Gma tte, pri, technnd routeizatio 
