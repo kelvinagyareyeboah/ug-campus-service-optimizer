@@ -1,2 +1,1 @@
-# ug-campus-smizer
-A s
+# ug-campus-smiz
