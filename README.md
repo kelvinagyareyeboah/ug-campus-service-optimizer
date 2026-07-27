@@ -1,2 +1,2 @@
-# ug-campus-se-ptimizer
+# ug-campus-smizer
 A s
