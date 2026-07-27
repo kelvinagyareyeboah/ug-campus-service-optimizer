@@ -1,2 +1,2 @@
 # ug-campus-service-optimizer
-A smart campystem 
+A smart camp
