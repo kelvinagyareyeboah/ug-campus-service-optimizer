@@ -109,6 +109,20 @@ public class Main {
         }
         System.out.println();
 
+        // 3.5 Greedy Choice Dispatching Demonstration (GreedyTaskScheduler)
+        // Selects highest-priority requests with shortest durations to dispatch immediately
+        System.out.println("--- Step 3.5: Greedy Choice Instant Dispatching (GreedyTaskScheduler) ---");
+
+        // Execute greedy task selection algorithm for a 5-hour shift window
+        List<ServiceRequest> greedyBatch = GreedyTaskScheduler.selectGreedyBatch(sampleRequests, 5);
+
+        // Print greedily dispatched task selection
+        System.out.printf("Greedy Dispatcher selected %d tasks for 5-hour shift:%n", greedyBatch.size());
+        for (ServiceRequest req : greedyBatch) {
+            System.out.println(" -> Dispatched: " + req);
+        }
+        System.out.println();
+
         // 4. Dijkstra Shortest Route Calculation
         System.out.println("--- Step 5: Route Optimization (Dijkstra's Algorithm) ---");
         System.out.println("Finding fastest maintenance route from Main Gate to Balme Library...");
