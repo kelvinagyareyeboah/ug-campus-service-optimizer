@@ -72,6 +72,30 @@ public class Main {
         sampleRequests.add(req3);
         sampleRequests.add(req4);
 
+        // 2.5 Routine Service Request Processing (FIFO CustomQueue Demonstration)
+        // Demonstrates standard routine service requests processed strictly in submission timestamp order
+        System.out.println("--- Step 2.5: Standard Routine Request Processing (FIFO CustomQueue) ---");
+
+        // Instantiate custom FIFO queue data structure for service requests
+        CustomQueue<ServiceRequest> routineQueue = new CustomQueue<>();
+
+        // Enqueue routine service requests into custom FIFO queue in submission timestamp order
+        for (ServiceRequest req : sampleRequests) {
+            routineQueue.enqueue(req);
+        }
+
+        // Output current size and front (head) element of the queue without removing it
+        System.out.printf("Enqueued %d routine service requests into CustomQueue (Front item peek: %s)%n",
+                routineQueue.size(), routineQueue.peek().getId());
+
+        // Process routine requests strictly in First-In-First-Out (FIFO) submission order
+        System.out.println("Processing routine requests strictly in submission timestamp order:");
+        while (!routineQueue.isEmpty()) {
+            // Dequeue and display the next routine request in submission order
+            System.out.println(" -> Processed (FIFO): " + routineQueue.dequeue());
+        }
+        System.out.println();
+
         // 3. Priority Queue Preemption Demonstration
         System.out.println("--- Step 3: Urgent Priority Preemption (Max-Heap Priority Queue) ---");
         CustomPriorityQueue<ServiceRequest> priorityQueue = new CustomPriorityQueue<>();
