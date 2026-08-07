@@ -1,0 +1,51 @@
+location_id,name,area,location_type,x_coord,y_coord
+L001,Balme Library,Legon,Library,5.65213,-0.18602
+L002,Great Hall,Legon,Administrative,5.659,-0.1864
+L003,Commonwealth Hall,Legon,Accommodation,5.64893,-0.18912
+L004,Legon Hall,Legon,Accommodation,5.6505,-0.1885
+L005,Volta Hall,Legon,Accommodation,5.6482,-0.1878
+L006,Mensah Sarbah Hall,Legon,Accommodation,5.6512,-0.1896
+L007,Akuafo Hall,Legon,Accommodation,5.6534,-0.1888
+L008,Jubilee Hall,Legon,Accommodation,5.6506,-0.1874
+L009,Pentagon Hostels,Legon,Accommodation,5.6498,-0.1882
+L010,UG Hospital,Legon,Health,5.65383,-0.18588
+L011,School of Public Health,Legon,Academic,5.6531,-0.1863
+L012,College of Health Sciences,Legon,Academic,5.6536,-0.187
+L013,Faculty of Law,Legon,Academic,5.64973,-0.18702
+L014,Department of Political Science,Legon,Academic,5.6486,-0.1881
+L015,Faculty of Arts,Legon,Academic,5.65004,-0.18722
+L016,Faculty of Social Sciences,Legon,Academic,5.64852,-0.18804
+L017,Faculty of Education,Legon,Academic,5.65154,-0.18685
+L018,School of Performing Arts,Legon,Culture,5.65239,-0.18795
+L019,School of Agriculture,Legon,Academic,5.65519,-0.18543
+L020,Faculty of Engineering Sciences,Legon,Academic,5.65105,-0.18652
+L021,Department of Computer Science,Legon,Academic,5.65105,-0.18775
+L022,Department of Mathematics,Legon,Academic,5.65124,-0.18765
+L023,Department of Physics,Legon,Academic,5.6526,-0.18742
+L024,Department of Chemistry,Legon,Academic,5.653,-0.18672
+L025,Department of Geography,Legon,Academic,5.65099,-0.18815
+L026,Noguchi Memorial Institute,Legon,Research,5.65126,-0.18789
+L027,Institute of Statistical Research,Legon,Research,5.6508,-0.1876
+L028,UG Business School (UGBS),Legon,Academic,5.6496,-0.1868
+L029,Science Lecture Theatre,Legon,Academic,5.65022,-0.18702
+L030,JQB Lecture Theatre,Legon,Academic,5.6519,-0.1872
+L031,Main Campus Gate (Accra Road),Legon,Entrance,5.65604,-0.18582
+L032,Legon East Gate,Legon,Entrance,5.65722,-0.18542
+L033,Night Market (Okponglo Junction),Legon,Food,5.656,-0.185
+L034,Student Representative Council,Legon,Administrative,5.65048,-0.189
+L035,Student Affairs Directorate,Legon,Administrative,5.6504,-0.18872
+L036,International House,Legon,Accommodation,5.64866,-0.18755
+L037,Staff Common Room,Legon,Service,5.6522,-0.1866
+L038,University Chapel,Legon,Religious,5.65074,-0.18795
+L039,University Mosque,Legon,Religious,5.6518,-0.1884
+L040,Campus Post Office,Legon,Service,5.6523,-0.18865
+L041,Campus Bank (GCB Branch),Legon,Service,5.65252,-0.18912
+L042,Ecobank ATM Centre,Legon,Service,5.65195,-0.18895
+L043,University Bookshop,Legon,Service,5.6516,-0.1881
+L044,Legon Botanical Gardens,Legon,Recreation,5.64915,-0.186
+L045,Sports Stadium (UG Sports Complex),Legon,Sports,5.65172,-0.18603
+L046,Swimming Pool,Legon,Sports,5.65141,-0.18622
+L047,Balme Gymnasium,Legon,Sports,5.65202,-0.18672
+L048,ICT Directorate,Legon,Administrative,5.65132,-0.18882
+L049,Distance Education Centre,Legon,Academic,5.65344,-0.18641
+L050,Security Service Headquarters,Legon,Service,5.65322,-0.18705
