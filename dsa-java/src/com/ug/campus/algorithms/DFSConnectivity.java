@@ -20,6 +20,16 @@ import java.util.Set;
  *   can reach a problem site and detecting isolated/disconnected road sections.
  * - Detects road-network cycles (e.g. alternative routes forming loops) so the team
  *   knows which portions of the campus road map are closed loops rather than dead ends.
+ *
+ * DESIGN NOTES (Visited-State Cleanup):
+ * Every public query creates its OWN fresh {@code visited} set that lives only for
+ * the duration of that single traversal. This means:
+ *   1. No stale state leaks between separate queries (previous traversals are never
+ *      reused, so results are always correct, even if the graph is edited in between).
+ *   2. Memory occupied by the traversal state becomes eligible for garbage collection
+ *      as soon as the query returns (automatic cleanup).
+ *   3. Helper methods are {@code static} and free of side effects on the graph, so
+ *      the CampusGraph is never mutated by this class.
  */
 public class DFSConnectivity {
 
@@ -147,5 +157,53 @@ public class DFSConnectivity {
             }
         }
         return false;
+    }
+
+    /**
+     * Collects the order in which DFS visits zones, starting from a given location.
+     *
+     * USEFUL FOR:
+     * Route inspection reports - auditing exactly which campus zones a maintenance
+     * patrol would pass through when scouting from one point.
+     *
+     * VISITED-STATE CLEANUP:
+     * The traversal builds its own local {@code visited} set which is discarded
+     * when the method returns. Callers receive only the resulting discovery list,
+     * so traversal state never leaks between separate calls.
+     *
+     * @param graph   the campus graph
+     * @param startId the zone where exploration begins
+     * @return the ordered list of zone IDs visited by DFS, in discovery order
+     */
+    public static List<String> collectTraversal(CampusGraph graph, String startId) {
+        Set<String> visited = new HashSet<>();
+        List<String> discoveryOrder = new ArrayList<>();
+        collectTraversal(graph, startId, visited, discoveryOrder);
+        return discoveryOrder;
+    }
+
+    /**
+     * Recursive walk that fills the pre-order discovery list and the visited set.
+     * Each zone is added to {@code discoveryOrder} the first time it is seen,
+     * which is exactly the pre-order sequence of the DFS tree.
+     *
+     * @param graph          the campus graph
+     * @param currentId      zone being visited now
+     * @param visited        zones already seen (prevents re-entering a cycle)
+     * @param discoveryOrder output list of zone IDs in the order they are first seen
+     */
+    private static void collectTraversal(CampusGraph graph, String currentId,
+                                         Set<String> visited, List<String> discoveryOrder) {
+        visited.add(currentId);
+        discoveryOrder.add(currentId);
+
+        for (RoadEdge edge : graph.getAdjacentEdges(currentId)) {
+            String neighborId = edge.getDestination().getId();
+            // Only descend into unseen zones; completed branches contribute no
+            // extra work, mirroring the state-isolation cleanup guarantee above.
+            if (!visited.contains(neighborId)) {
+                collectTraversal(graph, neighborId, visited, discoveryOrder);
+            }
+        }
     }
 }
