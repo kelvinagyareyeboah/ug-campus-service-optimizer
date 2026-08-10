@@ -1,4 +1,6 @@
 package com.ug.campus.datastructures;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * BinarySearchTree.java
@@ -53,6 +55,49 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         if (cmp < 0) return searchRec(current.left, key);
         else if (cmp > 0) return searchRec(current.right, key);
         else return current.value;
+    }
+
+
+    /**
+ * Returns all values whose keys fall within the given range.
+ *
+ *  @param minKey smallest key to include
+ *  @param maxKey largest key to include
+ * @return list of values within the key range
+ */
+    public List<V> rangeSearch(K minKey, K maxKey) {
+        List<V> results = new ArrayList<>();
+        rangeSearchRec(root, minKey, maxKey, results);
+        return results;
+    }
+
+    private void rangeSearchRec(
+            Node current,
+            K minKey,
+            K maxKey,
+            List<V> results) {
+
+        if (current == null) {
+            return;
+        }
+
+        int minComparison = minKey.compareTo(current.key);
+        int maxComparison = maxKey.compareTo(current.key);
+
+    // Search left subtree if there could be smaller keys in the range
+        if (minComparison < 0) {
+            rangeSearchRec(current.left, minKey, maxKey, results);
+        }
+
+    // Add current value if its key is inside the range
+        if (minComparison <= 0 && maxComparison >= 0) {
+            results.add(current.value);
+        }
+
+    // Search right subtree if there could be larger keys in the range
+        if (maxComparison > 0) {
+            rangeSearchRec(current.right, minKey, maxKey, results);
+        }
     }
 
     public int size() {
