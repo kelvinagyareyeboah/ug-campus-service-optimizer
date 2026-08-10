@@ -1,17 +1,5 @@
 package com.ug.campus.datastructures;
 
-/**
- * CustomHashTable.java
- * 
- * PURPOSE:
- * Implements a Hash Table using Separate Chaining.
- * 
- * USE CASE IN UG SYSTEM:
- * Provides O(1) average time complexity fast lookups for:
- * - Request ID lookup
- * - User email lookup
- * - Location ID lookup
- */
 public class CustomHashTable<K, V> {
     private static class Entry<K, V> {
         K key;
@@ -77,8 +65,10 @@ public class CustomHashTable<K, V> {
         Entry<K, V> prev = null;
         while (head != null) {
             if (head.key.equals(key)) {
-                if (prev != null) prev.next = head.next;
-                else buckets[index] = head.next;
+                if (prev != null)
+                    prev.next = head.next;
+                else
+                    buckets[index] = head.next;
                 size--;
                 return head.value;
             }
