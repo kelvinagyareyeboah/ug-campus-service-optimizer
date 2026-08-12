@@ -1,0 +1,3 @@
+resource_id,resource_type,home_location_id,capacity,availability_status
+V001,Van,L003,4,AVAILABLE
+R001,Rider,L002,1,AVAILABLE
