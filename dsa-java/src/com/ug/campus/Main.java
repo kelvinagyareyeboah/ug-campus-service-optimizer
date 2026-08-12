@@ -2,11 +2,14 @@ package com.ug.campus;
 
 import com.ug.campus.algorithms.*;
 import com.ug.campus.analysis.PerformanceBenchmark;
+import com.ug.campus.data.CSVDataLoader;
 import com.ug.campus.datastructures.*;
 import com.ug.campus.model.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Main.java
@@ -15,6 +18,7 @@ import java.util.List;
  * Application Entry Point and End-to-End System Demonstrator for UG Campus Service Optimizer.
  * 
  * DEMONSTRATES:
+ * 0. CSV Dataset Import (50+ Locations, 100+ Roads, 300+ Requests, 30+ Resources)
  * 1. Building the UG Campus Graph (Locations & Connections)
  * 2. Reporting & Storing Service Requests
  * 3. Queue & Priority Queue Preemption
@@ -31,6 +35,35 @@ public class Main {
         System.out.println("===================================================================");
         System.out.println("   UNIVERSITY OF GHANA CAMPUS SERVICE OPTIMIZER (JAVA DSA MODULE)");
         System.out.println("===================================================================\n");
+
+        // 0. Test CSV DataLoader
+        String csvDir = "data";
+        File dir = new File(csvDir);
+        if (!dir.exists()) {
+            csvDir = "../data"; // fallback relative path
+        }
+
+        String locFile = csvDir + "/locations_template.csv";
+        String roadFile = csvDir + "/roads_template.csv";
+        String reqFile = csvDir + "/service_requests_template.csv";
+        String resFile = csvDir + "/resources_template.csv";
+
+        System.out.println("--- Step 0: Loading Official CSV Datasets ---");
+        try {
+            Map<String, LocationNode> csvLocations = CSVDataLoader.loadLocations(locFile);
+            CampusGraph csvGraph = new CampusGraph();
+            int roadsLoaded = CSVDataLoader.loadRoads(csvGraph, roadFile, csvLocations);
+            List<ServiceRequest> csvRequests = CSVDataLoader.loadServiceRequests(reqFile, csvLocations);
+            List<MaintenanceTeam> csvResources = CSVDataLoader.loadResources(resFile, csvLocations);
+
+            System.out.printf(" ✅ Successfully loaded %d Locations from %s%n", csvLocations.size(), locFile);
+            System.out.printf(" ✅ Successfully loaded %d Roads into CampusGraph from %s%n", roadsLoaded, roadFile);
+            System.out.printf(" ✅ Successfully loaded %d Service Requests from %s%n", csvRequests.size(), reqFile);
+            System.out.printf(" ✅ Successfully loaded %d Technician Resources from %s%n%n", csvResources.size(), resFile);
+        } catch (Exception e) {
+            System.out.println(" ⚠️ CSV Loading Notice: " + e.getMessage() + " (Proceeding with in-memory graph)");
+            System.out.println();
+        }
 
         // 1. Initialize UG Campus Graph
         CampusGraph graph = new CampusGraph();
