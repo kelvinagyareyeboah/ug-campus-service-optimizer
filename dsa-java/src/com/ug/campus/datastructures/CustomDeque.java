@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  * - addFront: Used for supervisor emergency jump-ins at the head of the request
  * queue.
  * - addRear: Standard service request queuing at the tail.
- * - removeFront / removeRear: Efficient processing from either end.
+ * - removeFront / removeRear: Efficient processing from either end
  */
 public class CustomDeque<T> {
 
