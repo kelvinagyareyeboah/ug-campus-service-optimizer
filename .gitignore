@@ -3,3 +3,11 @@ dist/
 .vite/
 .env
 .DS_Store
+
+# Java
+dsa-java/bin/
+*.class
+.classpath
+.project
+.settings/
+target/
