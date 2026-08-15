@@ -1,0 +1,278 @@
+<div class="flex flex-col lg:flex-row h-full w-full bg-slate-950 text-slate-100 font-sans shadow-2xl rounded-2xl overflow-hidden border border-slate-800 backdrop-blur-xl">
+  
+  <!-- Left Side Panel: Support Context & Settings -->
+  <aside class="w-full lg:w-80 bg-slate-900/60 border-b lg:border-b-0 lg:border-r border-slate-800 p-6 flex flex-col justify-start overflow-y-auto max-h-full scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+    <div>
+      <!-- Platform Header -->
+      <div class="flex items-center space-x-3 mb-8">
+        <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text text-transparent">Support Portal</h1>
+          <p class="text-xs text-slate-400 font-medium">Agentic Assistant v1.0</p>
+        </div>
+      </div>
+
+      <!-- Ticket Information Details -->
+      <div class="space-y-6">
+        <div>
+          <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Ticket Information</h2>
+          <div class="bg-slate-950/40 rounded-xl border border-slate-800/60 p-4 space-y-3">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-400">Session ID</span>
+              <span class="font-mono text-slate-300 font-semibold">#CS-92841</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-400">Priority</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">CRITICAL</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-400">Assigned Queue</span>
+              <span class="text-indigo-400 font-medium">Developer Operations</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-400">Customer</span>
+              <span class="text-slate-300 font-medium">Alex Mercer</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-400">Tier</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">ENTERPRISE VIP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Status Info -->
+        <div>
+          <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Agent Specs</h2>
+          <div class="bg-slate-950/40 rounded-xl border border-slate-800/60 p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-400">AI Model</span>
+              <span class="text-slate-300 font-medium">gemini-3.5-flash</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-400">Engine Status</span>
+              <div class="flex items-center space-x-1.5">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-emerald-400 font-semibold text-[11px]">ONLINE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Key Settings Section -->
+    <div class="mt-6 pt-6 border-t border-slate-800">
+      <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Credentials Setup</h2>
+      <div class="bg-slate-950/50 rounded-xl border border-slate-800/80 p-4">
+        @if (hasApiKey()) {
+          <div class="space-y-3">
+            <div class="flex items-center space-x-2 text-emerald-400 text-xs">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+              <span class="font-semibold">API Key Configured</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-normal">
+              A key is loaded from settings/environment and active.
+            </p>
+            <button 
+              (click)="clearApiKey()" 
+              class="w-full py-1.5 px-3 rounded-lg text-xs font-semibold bg-rose-950/40 text-rose-400 border border-rose-900/60 hover:bg-rose-900/40 transition duration-200">
+              Remove Key
+            </button>
+          </div>
+        } @else {
+          <div class="space-y-3">
+            <div class="flex items-center space-x-2 text-amber-500 text-xs">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <span class="font-semibold">API Key Required</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-normal">
+              Provide your Gemini API key to interact with the support agent.
+            </p>
+            <div class="space-y-2">
+              <input 
+                type="password" 
+                placeholder="Enter Gemini API Key" 
+                [ngModel]="inputApiKey()"
+                (ngModelChange)="inputApiKey.set($event)"
+                class="w-full bg-slate-900 border border-slate-800 rounded-lg py-1.5 px-3 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-violet-600 transition" />
+              <button 
+                (click)="saveApiKey()" 
+                [disabled]="!inputApiKey().trim()"
+                class="w-full py-1.5 px-3 rounded-lg text-xs font-semibold bg-violet-600 text-white hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 shadow-md shadow-violet-600/10">
+                Save Key
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </aside>
+
+  <!-- Right Panel: Chat Area -->
+  <main class="flex-1 flex flex-col bg-slate-950/20 relative">
+    
+    <!-- Chat Header Status Bar -->
+    <header class="h-16 border-b border-slate-900 bg-slate-900/20 px-6 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="relative">
+          <div class="h-10 w-10 rounded-full bg-gradient-to-tr from-violet-600 to-fuchsia-600 flex items-center justify-center text-sm font-bold text-white shadow-inner">
+            G3
+          </div>
+          <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 border-2 border-slate-950 shadow-sm"></span>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h2 class="text-sm font-semibold text-white">Gemini Support Assistant</h2>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-400 border border-violet-500/20 font-medium">AGENT</span>
+          </div>
+          <p class="text-[11px] text-slate-400">Usually replies in seconds</p>
+        </div>
+      </div>
+      
+      <!-- Quick Info Badges -->
+      <div class="hidden sm:flex items-center space-x-3">
+        <span class="text-xs text-slate-500 font-medium">Assigned to Alex Mercer</span>
+      </div>
+    </header>
+
+    <!-- Error Banner -->
+    @if (apiError()) {
+      <div class="bg-rose-950/30 border-b border-rose-900/50 px-6 py-3 flex items-center justify-between text-rose-300 text-xs">
+        <div class="flex items-center space-x-2">
+          <svg class="h-4.5 w-4.5 text-rose-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span class="font-medium">{{ apiError() }}</span>
+        </div>
+        <button (click)="apiError.set(null)" class="text-rose-400 hover:text-rose-200 transition font-bold px-2">×</button>
+      </div>
+    }
+
+    <!-- Chat Feed Messages List -->
+    <div 
+      #chatFeedContainer
+      class="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+      
+      @for (msg of messages(); track msg.id) {
+        @if (msg.sender === 'system') {
+          <!-- System Message Row -->
+          <div class="flex justify-center my-2">
+            <div class="bg-slate-900/60 border border-slate-850 px-4 py-1.5 rounded-full text-[10px] text-slate-400 font-medium tracking-wide shadow-sm flex items-center space-x-1.5">
+              <svg class="h-3 w-3 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>{{ msg.content }}</span>
+            </div>
+          </div>
+        } @else {
+          <!-- Agent or User Message Bubble Row -->
+          <div class="flex w-full" [ngClass]="{ 'justify-end': msg.sender === 'user', 'justify-start': msg.sender === 'agent' }">
+            <div class="flex flex-col space-y-1 max-w-[80%]">
+              
+              <!-- Sender Name/Label -->
+              <span class="text-[10px] font-semibold text-slate-400 px-1" [ngClass]="{ 'text-right': msg.sender === 'user' }">
+                {{ msg.sender === 'user' ? 'Customer (Alex)' : 'AI Support Agent' }}
+              </span>
+
+              <!-- Bubble Box -->
+              <div 
+                class="rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm transition duration-300 relative border"
+                [ngClass]="{
+                  'bg-gradient-to-br from-violet-600/90 to-indigo-600/90 text-white border-violet-500/20 rounded-tr-none': msg.sender === 'user',
+                  'bg-slate-900/65 text-slate-200 border-slate-800/80 rounded-tl-none backdrop-blur-md': msg.sender === 'agent'
+                }">
+                <!-- Message text, preserving whitespace and newlines for markdown-like readability -->
+                <p class="whitespace-pre-line">{{ msg.content }}</p>
+              </div>
+
+              <!-- Time stamps -->
+              <span class="text-[9px] text-slate-500 px-1 font-medium" [ngClass]="{ 'text-right': msg.sender === 'user' }">
+                {{ msg.timestamp | date:'shortTime' }}
+              </span>
+            </div>
+          </div>
+        }
+      }
+
+      @if (isLoading()) {
+        <!-- Agent Typing Indicator Row -->
+        <div class="flex w-full justify-start">
+          <div class="flex flex-col space-y-1 max-w-[80%]">
+            <span class="text-[10px] font-semibold text-slate-400 px-1">Gemini AI</span>
+            <div class="rounded-2xl rounded-tl-none px-5 py-4 bg-slate-900/50 border border-slate-800/50 shadow-sm flex items-center space-x-1.5">
+              <span class="h-2 w-2 rounded-full bg-violet-400 animate-bounce" style="animation-delay: 0ms"></span>
+              <span class="h-2 w-2 rounded-full bg-violet-400 animate-bounce" style="animation-delay: 150ms"></span>
+              <span class="h-2 w-2 rounded-full bg-violet-400 animate-bounce" style="animation-delay: 300ms"></span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Quick Action Suggestions Chips Area -->
+    <div class="px-6 py-2 bg-slate-950/30 border-t border-slate-900">
+      <div class="flex items-center space-x-2 overflow-x-auto py-1 scrollbar-none no-scrollbar">
+        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider shrink-0 mr-1">Suggestions:</span>
+        @for (chip of actionChips; track chip.label) {
+          <button 
+            (click)="selectChip(chip.prompt)"
+            [disabled]="isLoading()"
+            class="shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900/80 border border-slate-800 text-slate-300 hover:border-violet-600 hover:bg-violet-950/20 hover:text-violet-300 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+            {{ chip.label }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Input Footer Bar -->
+    <footer class="p-6 bg-slate-950/50 border-t border-slate-900 backdrop-blur-md">
+      <form (submit)="sendUserMessage()" class="flex items-center space-x-3 bg-slate-900 border border-slate-800 rounded-xl p-2 focus-within:border-violet-600 transition duration-200">
+        <input 
+          type="text" 
+          placeholder="Ask the support agent a question..." 
+          [disabled]="isLoading()"
+          [ngModel]="userInput()"
+          (ngModelChange)="userInput.set($event)"
+          name="userInput"
+          class="flex-1 bg-transparent border-0 outline-none text-sm text-slate-200 placeholder-slate-500 px-3 focus:ring-0 focus:outline-none" />
+        
+        <button 
+          type="submit" 
+          [disabled]="!userInput().trim() || isLoading()"
+          class="h-10 px-5 rounded-lg text-xs font-bold bg-violet-600 hover:bg-violet-500 text-white transition duration-200 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed shadow-lg shadow-violet-600/10 shrink-0">
+          @if (isLoading()) {
+            <!-- Spinner -->
+            <svg class="animate-spin h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span>Thinking...</span>
+          } @else {
+            <span>Send Message</span>
+            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          }
+        </button>
+      </form>
+      
+      @if (!hasApiKey()) {
+        <p class="text-[10px] text-center text-amber-500 mt-2 font-medium">
+          ⚠️ Setup your Gemini API Key in the left settings panel to start sending support requests.
+        </p>
+      }
+    </footer>
+
+  </main>
+</div>
