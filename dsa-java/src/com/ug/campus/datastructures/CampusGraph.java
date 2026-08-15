@@ -22,19 +22,30 @@ import java.util.Map;
  * Primary graph data structure fed into BFS, DFS, Dijkstra, Prim, and Kruskal algorithms.
  */
 public class CampusGraph {
+    private static final int MAX_NODES = 100;
+
     private Map<String, LocationNode> nodes;
     private Map<String, List<RoadEdge>> adjacencyList;
     private List<RoadEdge> allEdges;
+    private double[][] adjacencyMatrix;
+    private Map<String, Integer> nodeIndices;
+    private int nextIndex = 0;
 
     public CampusGraph() {
         nodes = new HashMap<>();
         adjacencyList = new HashMap<>();
         allEdges = new ArrayList<>();
+        adjacencyMatrix = new double[MAX_NODES][MAX_NODES];
+        nodeIndices = new HashMap<>();
     }
 
     public void addLocation(LocationNode location) {
         nodes.put(location.getId(), location);
         adjacencyList.putIfAbsent(location.getId(), new ArrayList<>());
+
+        if (!nodeIndices.containsKey(location.getId())) {
+            nodeIndices.put(location.getId(), nextIndex++);
+        }
     }
 
     public void addRoad(LocationNode src, LocationNode dest, double distance, double travelTime, double weight) {
@@ -47,6 +58,11 @@ public class CampusGraph {
         adjacencyList.get(src.getId()).add(edge1);
         adjacencyList.get(dest.getId()).add(edge2);
         allEdges.add(edge1);
+
+        int srcIndex = nodeIndices.get(src.getId());
+        int destIndex = nodeIndices.get(dest.getId());
+        adjacencyMatrix[srcIndex][destIndex] = distance;
+        adjacencyMatrix[destIndex][srcIndex] = distance;
     }
 
     public LocationNode getLocation(String id) {
@@ -71,5 +87,9 @@ public class CampusGraph {
 
     public int getEdgeCount() {
         return allEdges.size();
+    }
+
+    public double[][] getAdjacencyMatrix() {
+        return adjacencyMatrix;
     }
 }
