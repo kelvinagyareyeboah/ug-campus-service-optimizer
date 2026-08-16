@@ -1,48 +1,44 @@
-import { Link, Route, Routes } from 'react-router-dom'
-import './App.css'
-
-function HomePage() {
-  return (
-    <section style={{ padding: '2rem' }}>
-      <h1>Home</h1>
-      <p>Welcome to the UG Campus Service client.</p>
-    </section>
-  )
-}
-
-function AboutPage() {
-  return (
-    <section style={{ padding: '2rem' }}>
-      <h1>About</h1>
-      <p>This app now uses React Router for page navigation.</p>
-    </section>
-  )
-}
-
-function NotFoundPage() {
-  return (
-    <section style={{ padding: '2rem' }}>
-      <h1>404</h1>
-      <p>The page you are looking for does not exist so check again.</p>
-    </section>
-  )
-}
+import { useState } from 'react';
+import './App.css';
+import { Navbar } from './components/Navbar';
+import { DashboardHome } from './components/DashboardHome';
+import { RequestPortal } from './components/RequestPortal';
+import { PriorityDispatch } from './components/PriorityDispatch';
+import { CampusMapNav } from './components/CampusMapNav';
+import { ShiftPlanner } from './components/ShiftPlanner';
+import { AlgorithmBenchmarkView } from './components/AlgorithmBenchmarkView';
 
 function App() {
-  return (
-    <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', padding: '1rem' }}>
-      <nav style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-      </nav>
+  const [activeTab, setActiveTab] = useState<string>('dashboard');
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+  return (
+    <div className="min-h-screen bg-[#f8f7f4] text-[#1c1917] flex flex-col font-sans">
+      {/* Navigation Header */}
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      {/* Main View Container */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {activeTab === 'dashboard' && <DashboardHome onNavigate={setActiveTab} />}
+        {activeTab === 'portal' && <RequestPortal onSubmitSuccess={() => setActiveTab('dashboard')} />}
+        {activeTab === 'dispatch' && <PriorityDispatch />}
+        {activeTab === 'map' && <CampusMapNav />}
+        {activeTab === 'shift' && <ShiftPlanner />}
+        {activeTab === 'benchmark' && <AlgorithmBenchmarkView />}
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t border-stone-200 py-6 text-center text-xs text-[#78716c]">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center space-x-2">
+            <span className="font-extrabold text-[#443627]">UG Campus Service Optimizer</span>
+            <span>•</span>
+            <span>University of Ghana, Legon</span>
+          </div>
+          <div>DCIT 204/308 Data Structures and Algorithms Joint Project</div>
+        </div>
+      </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
