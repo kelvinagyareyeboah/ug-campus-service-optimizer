@@ -180,6 +180,20 @@ public class Main {
         }
         System.out.println();
 
+        // 5b. Brute-Force Exhaustive Search (2^N Subsets) vs Dynamic Programming
+        System.out.println("--- Step 6b: Brute-Force Exhaustive Search vs Dynamic Programming ---");
+        BruteForceScheduler.BruteForceResult bfResult = BruteForceScheduler.optimizeShiftSchedule(sampleRequests, teamShiftCapacity);
+
+        System.out.printf("Brute-Force Best Shift Schedule (Selected %d tasks, Priority Score: %d, Hours Used: %d/%d, Subsets Evaluated: %d):%n",
+                bfResult.selectedRequests.size(), bfResult.totalPriorityValue, bfResult.totalHoursUsed, teamShiftCapacity, bfResult.subsetsEvaluated);
+        for (ServiceRequest req : bfResult.selectedRequests) {
+            System.out.println(" * " + req);
+        }
+        System.out.printf("Matches DP Optimal? %s%n%n",
+                bfResult.totalPriorityValue == dpResult.totalPriorityValue ? "YES" : "NO");
+
+        BruteForceScheduler.compareRuntimeWithDP(sampleRequests, teamShiftCapacity);
+
         // 6. Run Performance Benchmark
         PerformanceBenchmark.runAllBenchmarks(graph, sampleRequests, "LOC-01", "LOC-04");
 
