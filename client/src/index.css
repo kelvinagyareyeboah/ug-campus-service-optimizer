@@ -4,55 +4,98 @@
 
 @layer base {
   body {
-    @apply bg-[#f8fafc] text-[#0f172a] font-sans antialiased selection:bg-amber-100 selection:text-amber-900;
+    background-color: #faf6ee; /* Cream Background */
+    color: #0c4a6e; /* Deep Sea Blue Text */
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   }
 }
 
-/* Minimal Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: #faf6ee;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #0077be;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #006994;
 }
 
-/* Premium White & Gold SaaS Cards */
+/* Clean Cards with Sea Blue & Cream Theme */
 .clean-card {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.875rem;
+  border: 1px solid #e8dcc4; /* Soft Cream Border */
+  border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 4px 12px -2px rgba(12, 74, 110, 0.05);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.clean-card-hover {
-  transition: all 0.2s ease-in-out;
-}
-.clean-card-hover:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+.clean-card:hover {
+  border-color: #0077be;
+  box-shadow: 0 8px 24px -4px rgba(0, 119, 190, 0.12);
 }
 
-/* Custom Inputs */
+.clean-card-interactive {
+  border: 1px solid #e8dcc4;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clean-card-interactive:hover {
+  border-color: #0077be;
+  box-shadow: 0 8px 24px -4px rgba(0, 119, 190, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Custom Sea Blue & Cream Inputs */
 .clean-input {
-  background-color: #ffffff;
-  border: 1px solid #cbd5e1;
-  color: #0f172a;
-  border-radius: 0.625rem;
-  padding: 0.625rem 0.875rem;
+  background-color: #f5efe4;
+  border: 1px solid #e8dcc4;
+  color: #0c4a6e;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
   font-size: 0.875rem;
-  transition: border-color 0.15s ease;
+  transition: all 0.2s ease;
 }
+
 .clean-input:focus {
   outline: none;
-  border-color: #d97706;
-  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+  border-color: #0077be;
+  box-shadow: 0 0 0 3px rgba(0, 119, 190, 0.15);
+}
+
+/* Status Badges - Sea Blue Palette */
+.badge-emergency {
+  background: rgba(225, 29, 72, 0.12);
+  color: #be123c;
+  border: 1px solid rgba(225, 29, 72, 0.25);
+}
+
+.badge-high {
+  background: rgba(0, 119, 190, 0.12);
+  color: #0077be;
+  border: 1px solid rgba(0, 119, 190, 0.25);
+}
+
+.badge-medium {
+  background: rgba(3, 105, 161, 0.1);
+  color: #0369a1;
+  border: 1px solid rgba(3, 105, 161, 0.2);
+}
+
+.badge-low {
+  background: #f5efe4;
+  color: #0c4a6e;
+  border: 1px solid #e8dcc4;
 }

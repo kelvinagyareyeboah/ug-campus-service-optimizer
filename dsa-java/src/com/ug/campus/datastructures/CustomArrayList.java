@@ -14,8 +14,8 @@ public class CustomArrayList<T> {
         this.size = 0;
     }
 
-    public void insert(T item){
-        if (size == data.lenght){
+    public void insert(T item) {
+        if (size == data.length) {
             resize();
         }
 
@@ -23,22 +23,27 @@ public class CustomArrayList<T> {
         size++;
     }
 
-    public void resize(){
-        int currentCapacity = myDefaultArray.length;
-        int newCapacity = 2*currentSize;
+    public void add(T item) {
+        insert(item);
+    }
 
-        sys.out.println("[CustomArrayList] Resized capacity from X to 2X");
+    @SuppressWarnings("unchecked")
+    public void resize() {
+        int currentCapacity = data.length;
+        int newCapacity = currentCapacity * 2;
+
+        System.out.println("[CustomArrayList] Resized capacity from " + currentCapacity + " to " + newCapacity);
 
         T[] newData = (T[]) new Object[newCapacity];
         System.arraycopy(data, 0, newData, 0, size);
         data = newData;
     }
 
-    public T get(int index){
-        if (0 < index || index <= size){
-            throw new IllegalArgumentException("Index cannot be less than zero or bigger than "+size);            
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        
+
         return data[index];
     }
 

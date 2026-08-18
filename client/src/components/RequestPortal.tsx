@@ -1,5 +1,6 @@
 import type { FC, FormEvent } from 'react';
 import { useState } from 'react';
+import { useData } from '../contexts/DataContext';
 import { PlusCircleIcon, CheckCircleIcon, ArrowRightIcon } from './Icons';
 
 interface RequestPortalProps {
@@ -7,6 +8,7 @@ interface RequestPortalProps {
 }
 
 export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
+  const { locations, addRequest } = useData();
   const [email, setEmail] = useState('student1@st.ug.edu.gh');
   const [locationId, setLocationId] = useState('L001');
   const [category, setCategory] = useState('ELECTRICAL');
@@ -16,28 +18,19 @@ export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedMessage, setSubmittedMessage] = useState(false);
 
-  const locations = [
-    { id: 'L001', name: 'Balme Library (Legon)' },
-    { id: 'L002', name: 'Great Hall' },
-    { id: 'L003', name: 'Commonwealth Hall' },
-    { id: 'L004', name: 'Legon Hall' },
-    { id: 'L005', name: 'Volta Hall' },
-    { id: 'L006', name: 'Mensah Sarbah Hall' },
-    { id: 'L007', name: 'Akuafo Hall' },
-    { id: 'L008', name: 'Jubilee Hall' },
-    { id: 'L009', name: 'Pentagon Hostels' },
-    { id: 'L010', name: 'UG Hospital' },
-    { id: 'L015', name: 'Department of Computer Science' },
-    { id: 'L013', name: 'Faculty of Law' },
-    { id: 'L017', name: 'Estate Development Unit' },
-    { id: 'L020', name: 'Night Market' },
-    { id: 'L021', name: 'UG Fire Station' },
-    { id: 'L024', name: 'Electrical Substation' },
-  ];
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const targetLoc = locations.find(l => l.id === locationId)?.name || 'Legon Campus';
+
+    // Add request to shared global context
+    addRequest({
+      title: description || `${category} Service Complaint at ${targetLoc}`,
+      category: category,
+      location: targetLoc,
+      priority: priority,
+    });
 
     setTimeout(() => {
       setIsSubmitting(false);
@@ -45,33 +38,33 @@ export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
       setTimeout(() => {
         setSubmittedMessage(false);
         onSubmitSuccess();
-      }, 1500);
-    }, 600);
+      }, 1200);
+    }, 400);
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8 py-4">
+    <div className="max-w-3xl mx-auto space-y-8 py-4 font-sans text-[#0c4a6e]">
       {/* Header */}
       <div className="space-y-2 text-center max-w-xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f2efe9] text-[#785335] text-xs font-bold border border-stone-300">
-          <PlusCircleIcon size={14} /> Step 1: Issue Submission
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0077be]/10 text-[#0077be] text-xs font-bold border border-[#0077be]/20">
+          <PlusCircleIcon size={14} /> Issue Submission Portal
         </div>
-        <h2 className="text-3xl font-extrabold text-[#1c1917] tracking-tight">Report Campus Problem</h2>
-        <p className="text-[#78716c] text-sm">
+        <h2 className="text-3xl font-heading font-extrabold text-[#0c4a6e] tracking-tight">Report Campus Problem</h2>
+        <p className="text-[#0369a1] text-sm">
           Submit maintenance requests directly to the University of Ghana Smart Service Operations Engine.
         </p>
       </div>
 
       {submittedMessage && (
-        <div className="p-4 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-800 text-sm font-bold flex items-center justify-center gap-2">
-          <CheckCircleIcon size={18} />
-          Ticket successfully submitted and enqueued into the priority queue! Redirecting to Dashboard...
+        <div className="p-4 rounded-xl bg-[#0077be]/15 border border-[#0077be]/30 text-[#0c4a6e] text-sm font-bold flex items-center justify-center gap-2">
+          <CheckCircleIcon size={18} className="text-[#0077be]" />
+          Ticket submitted successfully! Live synced to Dashboard and Priority Queue.
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="clean-card p-8 space-y-6">
+      <form onSubmit={handleSubmit} className="clean-card bg-white p-8 space-y-6">
         <div className="space-y-2">
-          <label className="text-xs font-bold text-[#1c1917] uppercase tracking-wider">
+          <label className="text-xs font-bold text-[#0c4a6e] uppercase tracking-wider">
             Requester Email Address
           </label>
           <input
@@ -86,13 +79,13 @@ export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-[#1c1917] uppercase tracking-wider">
-              Campus Landmark Location
+            <label className="text-xs font-bold text-[#0c4a6e] uppercase tracking-wider">
+              Campus Landmark Location ({locations.length} Locations)
             </label>
             <select
               value={locationId}
               onChange={(e) => setLocationId(e.target.value)}
-              className="clean-input w-full"
+              className="clean-input w-full cursor-pointer"
             >
               {locations.map((loc) => (
                 <option key={loc.id} value={loc.id}>
@@ -103,13 +96,13 @@ export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-[#1c1917] uppercase tracking-wider">
+            <label className="text-xs font-bold text-[#0c4a6e] uppercase tracking-wider">
               Service Domain Category
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="clean-input w-full"
+              className="clean-input w-full cursor-pointer"
             >
               <option value="ELECTRICAL">Electrical Services</option>
               <option value="PLUMBING">Plumbing & Water</option>
@@ -124,7 +117,7 @@ export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-[#1c1917] uppercase tracking-wider">
+            <label className="text-xs font-bold text-[#0c4a6e] uppercase tracking-wider">
               Urgency Level
             </label>
             <div className="grid grid-cols-4 gap-2">
@@ -135,10 +128,8 @@ export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
                   onClick={() => setPriority(p)}
                   className={`py-2 rounded-xl text-xs font-bold border transition-all ${
                     priority === p
-                      ? p === 'EMERGENCY'
-                        ? 'bg-rose-700 text-white border-rose-700'
-                        : 'bg-[#443627] text-white border-[#443627]'
-                      : 'bg-white border-stone-300 text-[#57534e] hover:bg-[#f5f4f0]'
+                      ? 'bg-[#0077be] text-white border-[#0077be]'
+                      : 'bg-white border-[#e8dcc4] text-[#0c4a6e] hover:bg-[#f5efe4]'
                   }`}
                 >
                   {p}
@@ -148,7 +139,7 @@ export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-[#1c1917] uppercase tracking-wider">
+            <label className="text-xs font-bold text-[#0c4a6e] uppercase tracking-wider">
               Estimated Resolution Time (Hours)
             </label>
             <input
@@ -163,7 +154,7 @@ export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs font-bold text-[#1c1917] uppercase tracking-wider">
+          <label className="text-xs font-bold text-[#0c4a6e] uppercase tracking-wider">
             Issue Description
           </label>
           <textarea
@@ -179,7 +170,7 @@ export const RequestPortal: FC<RequestPortalProps> = ({ onSubmitSuccess }) => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3.5 rounded-xl bg-[#443627] hover:bg-[#35291d] text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full py-3.5 rounded-xl bg-[#0077be] hover:bg-[#006994] text-white font-heading font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
         >
           <span>{isSubmitting ? 'Submitting...' : 'Submit Maintenance Ticket'}</span>
           <ArrowRightIcon size={16} />

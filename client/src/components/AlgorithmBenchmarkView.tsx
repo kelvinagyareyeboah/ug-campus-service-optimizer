@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { ActivityIcon, SearchIcon, SlidersIcon } from './Icons';
+import { SearchIcon, SlidersIcon } from './Icons';
 
 export const AlgorithmBenchmarkView: FC = () => {
   const [activeBenchmark, setActiveBenchmark] = useState<'search' | 'sort'>('search');
@@ -22,72 +22,65 @@ export const AlgorithmBenchmarkView: FC = () => {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 py-4">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-stone-200 pb-6">
-        <div className="space-y-1">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f2efe9] text-[#785335] text-xs font-bold border border-stone-300">
-            <ActivityIcon size={14} /> Step 5: Empirical Speed Benchmarks
-          </div>
-          <h2 className="text-3xl font-extrabold text-[#1c1917] tracking-tight">Algorithm Performance Lab</h2>
-          <p className="text-[#78716c] text-sm">
-            Empirical speed comparisons in nanoseconds and milliseconds across dataset sizes (100 to 10,000 items).
-          </p>
+    <div className="space-y-6 font-sans text-[#0c4a6e] max-w-5xl mx-auto py-2">
+      {/* Header & Tabs */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e8dcc4]">
+        <div>
+          <h1 className="text-2xl font-heading font-extrabold text-[#0c4a6e] tracking-tight">
+            Algorithm Performance Benchmarks
+          </h1>
+          <p className="text-xs text-[#0369a1] mt-0.5">Empirical execution time scaling across dataset sizes (N=100 to 10,000)</p>
         </div>
 
-        <div className="flex items-center space-x-2 clean-card p-1.5 border-stone-300 shrink-0 bg-white">
-          {[
-            { id: 'search', label: 'Search Speed', icon: SearchIcon },
-            { id: 'sort', label: 'Sorting Speed', icon: SlidersIcon },
-          ].map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeBenchmark === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveBenchmark(tab.id as any)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                  isActive
-                    ? 'bg-[#1c1917] text-white shadow-sm'
-                    : 'text-[#57534e] hover:bg-[#f5f4f0]'
-                }`}
-              >
-                <Icon size={14} />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
+        <div className="flex items-center space-x-1 clean-card bg-white p-1 border-[#e8dcc4]">
+          <button
+            onClick={() => setActiveBenchmark('search')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
+              activeBenchmark === 'search'
+                ? 'bg-[#0077be] text-white shadow-sm'
+                : 'text-[#0c4a6e] hover:bg-[#f5efe4]'
+            }`}
+          >
+            <SearchIcon size={14} />
+            <span>Searching</span>
+          </button>
+          <button
+            onClick={() => setActiveBenchmark('sort')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
+              activeBenchmark === 'sort'
+                ? 'bg-[#0077be] text-white shadow-sm'
+                : 'text-[#0c4a6e] hover:bg-[#f5efe4]'
+            }`}
+          >
+            <SlidersIcon size={14} />
+            <span>Sorting</span>
+          </button>
         </div>
       </div>
 
       {activeBenchmark === 'search' && (
-        <div className="clean-card p-6 space-y-4 bg-white">
-          <div className="flex items-center justify-between border-b border-stone-200 pb-4">
-            <div>
-              <h3 className="text-sm font-extrabold text-[#1c1917] uppercase tracking-wider">
-                Search Performance Scaling (Linear Search vs Binary Search)
-              </h3>
-              <p className="text-xs text-[#78716c]">Measured in nanoseconds (ns)</p>
-            </div>
-          </div>
+        <div className="clean-card bg-white p-4 space-y-3">
+          <h3 className="text-xs font-heading font-bold text-[#0c4a6e] uppercase pb-2 border-b border-[#e8dcc4]">
+            Search Scaling: Linear Search vs Binary Search (ns)
+          </h3>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-[#1c1917]">
-              <thead className="bg-[#fbfbfa] text-[#78716c] uppercase font-extrabold text-[11px]">
+            <table className="w-full text-left text-xs text-[#0c4a6e]">
+              <thead className="bg-[#f5efe4] text-[#0369a1] uppercase font-bold text-[11px]">
                 <tr>
-                  <th className="p-3.5">Dataset Size ($N$)</th>
-                  <th className="p-3.5">Linear Search</th>
-                  <th className="p-3.5">Binary Search</th>
-                  <th className="p-3.5">Empirical Speedup</th>
+                  <th className="p-3">Dataset Size (N)</th>
+                  <th className="p-3">Linear Search</th>
+                  <th className="p-3">Binary Search</th>
+                  <th className="p-3">Empirical Speedup</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-200 font-mono text-sm">
+              <tbody className="divide-y divide-[#e8dcc4] font-mono text-xs">
                 {searchData.map((row, i) => (
-                  <tr key={i} className="hover:bg-[#fbfbfa]">
-                    <td className="p-3.5 font-bold text-[#785335]">{row.size} items</td>
-                    <td className="p-3.5 text-rose-700">{row.linearNs}</td>
-                    <td className="p-3.5 text-emerald-700 font-bold">{row.binaryNs}</td>
-                    <td className="p-3.5 text-indigo-700 font-bold">{row.speedup}</td>
+                  <tr key={i} className="hover:bg-[#f5efe4]">
+                    <td className="p-3 font-bold text-[#0c4a6e]">{row.size} items</td>
+                    <td className="p-3 text-[#be123c]">{row.linearNs}</td>
+                    <td className="p-3 text-[#0c4a6e] font-bold">{row.binaryNs}</td>
+                    <td className="p-3 text-[#0077be] font-bold">{row.speedup}</td>
                   </tr>
                 ))}
               </tbody>
@@ -97,35 +90,30 @@ export const AlgorithmBenchmarkView: FC = () => {
       )}
 
       {activeBenchmark === 'sort' && (
-        <div className="clean-card p-6 space-y-4 bg-white">
-          <div className="flex items-center justify-between border-b border-stone-200 pb-4">
-            <div>
-              <h3 className="text-sm font-extrabold text-[#1c1917] uppercase tracking-wider">
-                Sorting Performance Scaling ($O(n^2)$ vs $O(n \log n)$)
-              </h3>
-              <p className="text-xs text-[#78716c]">Measured in milliseconds (ms)</p>
-            </div>
-          </div>
+        <div className="clean-card bg-white p-4 space-y-3">
+          <h3 className="text-xs font-heading font-bold text-[#0c4a6e] uppercase pb-2 border-b border-[#e8dcc4]">
+            Sorting Scaling: O(n²) vs O(n log n) Algorithms (ms)
+          </h3>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-[#1c1917]">
-              <thead className="bg-[#fbfbfa] text-[#78716c] uppercase font-extrabold text-[11px]">
+            <table className="w-full text-left text-xs text-[#0c4a6e]">
+              <thead className="bg-[#f5efe4] text-[#0369a1] uppercase font-bold text-[11px]">
                 <tr>
-                  <th className="p-3.5">Dataset Size ($N$)</th>
-                  <th className="p-3.5">Selection Sort</th>
-                  <th className="p-3.5">Insertion Sort</th>
-                  <th className="p-3.5">Merge Sort</th>
-                  <th className="p-3.5">QuickSort</th>
+                  <th className="p-3">Dataset Size (N)</th>
+                  <th className="p-3">Selection Sort</th>
+                  <th className="p-3">Insertion Sort</th>
+                  <th className="p-3">Merge Sort</th>
+                  <th className="p-3">QuickSort</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-200 font-mono text-sm">
+              <tbody className="divide-y divide-[#e8dcc4] font-mono text-xs">
                 {sortData.map((row, i) => (
-                  <tr key={i} className="hover:bg-[#fbfbfa]">
-                    <td className="p-3.5 font-bold text-[#785335]">{row.size} items</td>
-                    <td className="p-3.5 text-stone-600">{row.selection}</td>
-                    <td className="p-3.5 text-blue-700">{row.insertion}</td>
-                    <td className="p-3.5 text-indigo-700 font-bold">{row.merge}</td>
-                    <td className="p-3.5 text-emerald-700 font-bold">{row.quick}</td>
+                  <tr key={i} className="hover:bg-[#f5efe4]">
+                    <td className="p-3 font-bold text-[#0c4a6e]">{row.size} items</td>
+                    <td className="p-3 text-[#0369a1]">{row.selection}</td>
+                    <td className="p-3 text-[#0369a1]">{row.insertion}</td>
+                    <td className="p-3 text-[#0077be] font-bold">{row.merge}</td>
+                    <td className="p-3 text-[#0c4a6e] font-bold">{row.quick}</td>
                   </tr>
                 ))}
               </tbody>

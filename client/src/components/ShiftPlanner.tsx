@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { ClockIcon, CheckCircleIcon, SlidersIcon } from './Icons';
+import { CheckCircleIcon } from './Icons';
 
 export const ShiftPlanner: FC = () => {
   const [shiftHours, setShiftHours] = useState<number>(5);
@@ -27,82 +27,74 @@ export const ShiftPlanner: FC = () => {
   const totalHoursUsed = selectedDPTasks.reduce((acc, t) => acc + t.hours, 0);
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 py-4">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-stone-200 pb-6">
-        <div className="space-y-1">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f2efe9] text-[#785335] text-xs font-bold border border-stone-300">
-            <ClockIcon size={14} /> Step 4: Technician Daily Shift Planner
-          </div>
-          <h2 className="text-3xl font-extrabold text-[#1c1917] tracking-tight">Technician Shift Workload Optimizer</h2>
-          <p className="text-[#78716c] text-sm">
-            Mathematically selects the best set of jobs to maximize priority score within daily shift hours.
-          </p>
+    <div className="space-y-6 font-sans text-[#0c4a6e] max-w-5xl mx-auto py-2">
+      {/* Header & Slider */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e8dcc4]">
+        <div>
+          <h1 className="text-2xl font-heading font-extrabold text-[#0c4a6e] tracking-tight">
+            Technician Shift Planner
+          </h1>
+          <p className="text-xs text-[#0369a1] mt-0.5">0/1 Knapsack Dynamic Programming Workload Optimizer</p>
         </div>
 
-        {/* Shift Slider */}
-        <div className="clean-card p-4 border-stone-300 space-y-2 min-w-[280px] shrink-0 bg-white">
-          <div className="flex justify-between items-center text-xs font-bold">
-            <span className="text-[#1c1917] flex items-center gap-1.5">
-              <SlidersIcon size={14} /> Shift Capacity:
-            </span>
-            <span className="text-[#785335] font-mono">{shiftHours} Hours</span>
-          </div>
+        <div className="flex items-center gap-3 clean-card bg-white px-3 py-1.5 border-[#e8dcc4]">
+          <span className="text-xs font-bold text-[#0c4a6e]">Capacity:</span>
           <input
             type="range"
             min="2"
             max="10"
             value={shiftHours}
             onChange={(e) => setShiftHours(parseInt(e.target.value))}
-            className="w-full accent-[#443627] cursor-pointer"
+            className="w-28 accent-[#0077be] cursor-pointer"
           />
+          <span className="text-xs font-mono font-bold text-[#0077be]">{shiftHours} Hours</span>
         </div>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="clean-card p-6 border-emerald-300 bg-emerald-50">
-          <span className="text-xs text-emerald-900 font-extrabold block uppercase">Jobs Assigned</span>
-          <span className="text-3xl font-extrabold text-emerald-800 mt-1 block">{selectedDPTasks.length} Tasks</span>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="clean-card bg-white p-4 space-y-1">
+          <span className="text-[11px] font-bold text-[#0369a1] uppercase">Assigned Tasks</span>
+          <p className="text-2xl font-heading font-extrabold text-[#0c4a6e]">{selectedDPTasks.length} Tasks</p>
         </div>
-
-        <div className="clean-card p-6 border-[#d6c4a8] bg-[#f5ebd9]">
-          <span className="text-xs text-[#443627] font-extrabold block uppercase">Total Priority Score</span>
-          <span className="text-3xl font-extrabold text-[#785335] mt-1 block">{totalPriorityWeight} Points</span>
+        <div className="clean-card bg-[#ffffff] p-4 space-y-1">
+          <span className="text-[11px] font-bold text-[#0369a1] uppercase">Priority Score</span>
+          <p className="text-2xl font-heading font-extrabold text-[#0077be]">{totalPriorityWeight} Points</p>
         </div>
-
-        <div className="clean-card p-6 border-blue-300 bg-blue-50">
-          <span className="text-xs text-blue-900 font-extrabold block uppercase">Hours Utilized</span>
-          <span className="text-3xl font-extrabold text-blue-800 mt-1 block">{totalHoursUsed} / {shiftHours} Hours</span>
+        <div className="clean-card bg-white p-4 space-y-1">
+          <span className="text-[11px] font-bold text-[#0369a1] uppercase">Hours Used</span>
+          <p className="text-2xl font-heading font-extrabold text-[#0c4a6e]">{totalHoursUsed} / {shiftHours} Hours</p>
         </div>
       </div>
 
-      {/* Jobs Table */}
-      <div className="clean-card p-6 space-y-4 bg-white">
-        <h3 className="text-sm font-extrabold text-[#1c1917] uppercase tracking-wider">
-          Selected Shift Schedule (0/1 Knapsack Result)
+      {/* Selected Schedule */}
+      <div className="clean-card bg-white p-4 space-y-3">
+        <h3 className="text-xs font-heading font-bold text-[#0c4a6e] uppercase pb-2 border-b border-[#e8dcc4]">
+          Optimized Schedule Output (0/1 Knapsack DP)
         </h3>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           {selectedDPTasks.map((task) => (
             <div
               key={task.id}
-              className="p-4 rounded-xl bg-[#fbfbfa] border border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+              className="p-3 rounded-lg bg-[#f5efe4] border border-[#e8dcc4] flex items-center justify-between text-xs"
             >
-              <div className="flex items-center space-x-4">
-                <div className="p-2 rounded-lg bg-emerald-100 text-emerald-800">
-                  <CheckCircleIcon size={20} />
-                </div>
+              <div className="flex items-center space-x-3">
+                <CheckCircleIcon size={16} className="text-[#0077be]" />
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-[#785335] bg-[#f2efe9] px-2 py-0.5 rounded border border-stone-300">{task.id}</span>
-                    <h4 className="text-sm font-bold text-[#1c1917]">{task.title}</h4>
+                    <span className="font-mono font-bold text-[#0077be] bg-white px-2 py-0.5 rounded border border-[#e8dcc4]">
+                      {task.id}
+                    </span>
+                    <h4 className="font-heading font-bold text-[#0c4a6e]">{task.title}</h4>
                   </div>
-                  <p className="text-xs text-[#78716c] mt-0.5">Duration: {task.hours} Hours • Priority Weight: {task.priorityWeight}</p>
+                  <p className="text-[11px] text-[#0369a1] mt-0.5">
+                    {task.hours} Hours • Priority Weight: {task.priorityWeight}
+                  </p>
                 </div>
               </div>
 
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#f5ebd9] text-[#785335] border border-[#d6c4a8] self-start sm:self-auto">
+              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#0077be]/10 text-[#0077be] border border-[#0077be]/20">
                 {task.priorityLabel}
               </span>
             </div>
