@@ -11,12 +11,19 @@
 ![Leaflet](https://img.shields.io/badge/Leaflet-OpenStreetMap-199900?style=for-the-badge&logo=leaflet&logoColor=white)
 ![Build](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+[![Deployment](https://img.shields.io/badge/Vercel-Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ug-optimizer.vercel.app/)
 
 <p align="center">
   <b>Demonstrating Real-World Data Structures & Algorithms (DSA) in a Campus Environment</b>
   <br />
   Priority Preemption • Graph Pathfinding • Minimum Spanning Trees • Dynamic Programming • Empirical Profiling
+  <br /><br />
+  🌐 <b>Live Web Application:</b> <a href="https://ug-optimizer.vercel.app/" target="_blank"><b>https://ug-optimizer.vercel.app/</b></a>
 </p>
+
+<br />
+
+<img src="./dashboard.png" alt="UG Campus Service Optimizer Dashboard Preview" width="100%" />
 
 ---
 
@@ -29,7 +36,7 @@
 - [🧮 Data Structures & Algorithms Breakdown](#-data-structures--algorithms-breakdown)
 - [📊 Campus & Service Datasets](#-campus--service-datasets)
 - [🛠️ Technology Stack](#️-technology-stack)
-- [👥 15-Person Team Task Assignments](#-15-person-team-task-assignments)
+- [👥 Team Members & Project Contributions](#-team-members--project-contributions)
 - [🚀 Quickstart & Setup Guide](#-quickstart--setup-guide)
 - [📈 Empirical Performance Metrics](#-empirical-performance-metrics)
 - [📜 License](#-license)
@@ -119,20 +126,28 @@ The system supports **7 campus service domains**:
 
 ---
 
-## 👥 Team Task Group Assignments (1 DS + 1 Algorithm, 2 Members per Task)
+## 👥 Team Members & Project Contributions
 
-To prevent Git merge conflicts, each component is isolated in its own Java file. See [`TASKS.md`](TASKS.md) for full details:
+Each team member is responsible for dedicated core modules, data structures, and algorithmic components. See [`TASKS.md`](TASKS.md) for full details:
 
-| Task Group | Assigned Members | Data Structure (1) | Algorithm (1) |
-| :---: | :--- | :--- | :--- |
-| **Task 1** | **Person 1 & Person 2** | `CustomQueue.java` *(FIFO Queue)* | `GreedyTaskScheduler.java` *(Greedy Choice)* |
-| **Task 2** | **Person 3 & Person 4** | `CustomPriorityQueue.java` *(Max-Heap)* | `DynamicProgrammingOptimizer.java` *(0/1 Knapsack DP)* |
-| **Task 3** | **Person 5 & Person 6** | `CustomStack.java` *(Audit Stack)* | `BFSExplorer.java` *(Breadth-First Search)* |
-| **Task 4** | **Person 7 & Person 8** | `CustomHashTable.java` *(Hash Table)* | `DFSConnectivity.java` *(Depth-First Search)* |
-| **Task 5** | **Person 9 & Person 10** | `CampusGraph.java` *(UG Campus Graph)* | `DijkstraShortestPath.java` *(Dijkstra Shortest Path)* |
-| **Task 6** | **Person 11 & Person 12** | `BinarySearchTree.java` *(BST)* | `PrimMST.java` *(Prim's Minimum Spanning Tree)* |
-| **Task 7** | **Person 13 & Person 14** | `AVLTree.java` *(Self-Balancing Tree)* | `KruskalMST.java` *(Kruskal's MST & Union-Find)* |
-| **Task 8** | **Person 15 & Team Lead** | `BTree.java` *(Multi-way B-Tree)* | `PerformanceBenchmark.java` *(Performance Profiler Engine)* |
+| No. | Student ID | Full Name | GitHub Username | Primary DSA Assignment | Tracking | Status |
+| :---: | :---: | :--- | :--- | :--- | :--- | :---: |
+| 1 | 22159683 | Kelvin Agyare Yeboah | kelvinagyareyeboah | Group Lead, System Architecture & Profiler Engine, `PerformanceBenchmark.java`, `BTree.java` | Core Integration | Completed |
+| 2 | 22014087 | Anthony Gudu | agudu50 | `CustomQueue.java`, FIFO Queue | Core Module | Completed |
+| 3 | 22152286 | Boadu Acheampong Yaw Asante | yawasante dev | `GreedyTaskScheduler.java`, Greedy Choice | Core Module | Completed |
+| 4 | 22046873 | Adjei David Boafo | DavidAdjeiB | `CustomPriorityQueue.java` and `DisjointSet.java`, Union Find | Issue 23 / PR 28 | Completed |
+| 5 | 22099559 | Osman Ilyas | samuncleML | `DynamicProgrammingOptimizer.java`, 0/1 Knapsack DP | Core Module | Completed |
+| 6 | 22027295 | Frank Tsetse Kofi Bless | Tsetse bless | `CustomStack.java`, Audit Trail Stack | Core Module | Completed |
+| 7 | 22306887 | AFFADZI, GADDIEL DONALD | a pssh | `BFSExplorer.java`, Breadth First Search | Core Module | Completed |
+| 8 | 22372832 | MAGLO, PRIMUS NORVINYO | Phoenicx1 | `DFSConnectivity.java` and `CustomHashTable.java` | Core Module | Completed |
+| 9 | 22335736 | DEH, ARNOLD KWASI | arnoldmackenzie | `CampusGraph.java`, Adjacency Matrix and List | Issue 24 | Completed |
+| 10 | 22301802 | LUKMAN, HAMNA TIMTONI | Hamna T | `DijkstraShortestPath.java`, Dijkstra Algorithm | Core Module | Completed |
+| 11 | 22328690 | DARKO, ELIZABETH ACHEAMPOMAA | CODEwithBETH dev | `BinarySearchTree.java`, BST Search Index | Core Module | Completed |
+| 12 | 22402808 | AFRIYIE, GLORY OSEI WUSU | ry glo | `PrimMST.java`, Prim Minimum Spanning Tree | Core Module | Completed |
+| 13 | 22403283 | ATTIPO, SHIKA ETHLYN | Ethlyn Codes | `AVLTree.java`, Self Balancing Tree | Core Module | Completed |
+| 14 | 22335990 | SIMONS, SAMUEL WEABO JUNIOR | Simons990 | `KruskalMST.java` and `BruteForceScheduler.java` | Issue 27 / PR 34 | Completed |
+| 15 | 22413744 | PARWANI, RAKESH RODNEY | rakeshparwani | `BruteForceScheduler.java` and Sorting Suite | Issue 27 / PR 34 | Completed |
+| 16 | 22395054 | AGYEMANG, BENEDICT NANA OBENG | NANAOBENG1234 | `BruteForceScheduler.java` and Deque/CircularQueue | Issue 27 / PR 34 | Completed |
 
 ---
 
@@ -154,6 +169,10 @@ java -cp "dsa-java/bin" com.ug.campus.Main
 ```
 
 ### 2️⃣ Run React Web Application
+
+> [!TIP]
+> **Live Production Demo**: You can access the live deployed application directly at [https://ug-optimizer.vercel.app/](https://ug-optimizer.vercel.app/).
+
 ```bash
 cd client
 npm install
